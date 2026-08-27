@@ -7,9 +7,12 @@ export const registerUser = async (data: IRegister) => {
   try {
     const response = await api.post("/auth/register", data);
     return response.data;
-  } catch (error: any) {
-    throw error.response.data;
-  }
+  }  catch (error: any) {
+  throw error?.response?.data || {
+    message: error?.message || "Something went wrong",
+  };
+}
+  
 };
 
 //*  login user
